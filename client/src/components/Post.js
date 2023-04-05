@@ -1,10 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 
 export default function Post() {
+  const [description, setDescription] = useState("");
+  const [code_data, setCodedata] = useState("");
+
+  const onSubmitForm = async (e) => {
+    e.preventDefault();
+    try {
+      const body = { description, code_data };
+      const response = await fetch("http://localhost:5000/codebase", {
+        method: "POST",
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      window.location = "/";
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
   return (
     <>
       <div class="constainer p-10">
-        <form>
+        <form onSubmit={onSubmitForm}>
           <div class="mb-6">
             <label
               for="title"
@@ -18,6 +36,8 @@ export default function Post() {
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="Title"
               required
+              value={description}//named:title:as description in db
+              onChange={e => setDescription(e.target.value)} //to preventing change in the description
             />
           </div>
 
@@ -25,19 +45,25 @@ export default function Post() {
           <label
             for="description-id"
             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-          >Description</label>
+          >
+            Description
+          </label>
           <textarea
             class="block bg-gray-50 w-full px-4 py-2 leading-5 text-gray-900  border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 mb-5"
             rows="4"
             id="description-id"
             placeholder="Explain the program briefly"
+            value={code_data}
+            onChange={e => setCodedata(e.target.value)}
           ></textarea>
-          
+
           {/* Code area  */}
           <label
             for="codeArea-id"
             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-          >Paste the code here</label>
+          >
+            Paste the code here
+          </label>
           <textarea
             class="block bg-gray-50 w-full px-4 py-2 leading-5 text-gray-900  border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 mb-5"
             rows="8"
