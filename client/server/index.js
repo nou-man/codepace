@@ -14,10 +14,9 @@ app.use(express.json());
 
 app.post("/codebase", async (req, res) => {
   try {
-    const { description, code_data } = req.body;
+    const { description, code_data,whole_code } = req.body;
     const newCode = await pool.query(
-      "INSERT INTO codebase (description, code_data) VALUES($1, $2) RETURNING *",
-      [description, code_data]
+      "INSERT INTO codebase (description, code_data, whole_code) VALUES($1, $2, $3) RETURNING *", [description, code_data, whole_code]
     );
 
     res.json(newCode.rows);

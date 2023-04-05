@@ -4,6 +4,7 @@ import Card from './components/Card'
 import Navbar from './components/Navbar';
 import { Routes, Route } from "react-router-dom"
 import About from './components/About';
+import Post from './components/Post';
 
 function App() {
 
@@ -14,6 +15,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Card />} />
         <Route path="/about" element={<About />} />
+        <Route path="/post" element={<Post />} />
 
       </Routes>
     </>
