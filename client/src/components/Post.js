@@ -1,17 +1,24 @@
 import React, { useState } from "react";
 
 export default function Post() {
+  
   const [description, setDescription] = useState("");
   const [code_data, setCodedata] = useState("");
+  const [whole_code=[], setWholeCode] = useState("");
 
   const onSubmitForm = async (e) => {
     e.preventDefault();
     try {
-      const body = { description, code_data };
+      // const body = { description, code_data };
       const response = await fetch("http://localhost:5000/codebase", {
         method: "POST",
         headers: { "Content-type": "application/json" },
-        body: JSON.stringify(body),
+        // body: JSON.stringify(body),
+        body: JSON.stringify({
+          "description": description,
+          "code_data" : code_data,
+          "whole_code": whole_code
+        }),
       });
       window.location = "/";
     } catch (err) {
@@ -69,6 +76,7 @@ export default function Post() {
             rows="8"
             id="description-id"
             placeholder="Explain the program briefly"
+            onChange={e => setWholeCode(e.target.value)}
           ></textarea>
 
           <div class="flex items-start mb-6">
@@ -85,7 +93,7 @@ export default function Post() {
               for="remember"
               class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
             >
-              Remember me
+              Agree to terms and conditions
             </label>
           </div>
           <button
