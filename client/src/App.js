@@ -5,6 +5,7 @@ import Navbar from './components/Navbar';
 import { Routes, Route } from "react-router-dom"
 import About from './components/About';
 import Post from './components/Post';
+import Footer from './components/Footer';
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
         <Route path="/post" element={<Post />} />
 
       </Routes>
+      <Footer/>
     </>
   );
 }

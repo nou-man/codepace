@@ -5,6 +5,14 @@ export default function Modal({ code }) {
     //use state htmlFor modal visiblity
     const [showMyModal, setShowMyModal] = useState(false);
 
+    function copyToClip(copyCode){
+        navigator.clipboard.writeText(copyCode).then(function() {
+            console.log('Async: Copying to clipboard was successful!');
+          }, function(err) {
+            console.error('Async: Could not copy text: ', err);
+          });
+    }
+
     return (
         <>
             <a
@@ -36,7 +44,7 @@ export default function Modal({ code }) {
 
                         <label htmlFor="message" class="inline mb-2 text-sm mb-5 font-medium text-gray-900 dark:text-white">{code.description}</label>
 
-                        <button type="button" class="float-right text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800">copy</button>
+                        <button type="button" class="float-right text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800" onClick={() => copyToClip(code.whole_code)}>copy</button>
                         <textarea id="message" rows="20" class="block sm:rows-10 p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Leave a comment..." value={code.whole_code}></textarea>
                         <button type="button" onClick={() => setShowMyModal(false)} class="text-red-700 mt-5 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">close</button>
                     </div>
