@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 
 export default function Post() {
-  
   const [description, setDescription] = useState("");
   const [code_data, setCodedata] = useState("");
-  const [whole_code=[], setWholeCode] = useState("");
+  const [whole_code, setWholeCode] = useState("");
 
   const onSubmitForm = async (e) => {
     e.preventDefault();
@@ -15,9 +14,9 @@ export default function Post() {
         headers: { "Content-type": "application/json" },
         // body: JSON.stringify(body),
         body: JSON.stringify({
-          "description": description,
-          "code_data" : code_data,
-          "whole_code": whole_code
+          description: description,
+          code_data: code_data,
+          whole_code: whole_code,
         }),
       });
       window.location = "/";
@@ -43,8 +42,8 @@ export default function Post() {
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="Title"
               required
-              value={description}//named:title:as description in db
-              onChange={e => setDescription(e.target.value)} //to preventing change in the description
+              value={description} //named:title:as description in db
+              onChange={(e) => setDescription(e.target.value)} //to preventing change in the description
             />
           </div>
 
@@ -61,7 +60,7 @@ export default function Post() {
             id="description-id"
             placeholder="Explain the program briefly"
             value={code_data}
-            onChange={e => setCodedata(e.target.value)}
+            onChange={(e) => setCodedata(e.target.value)}
           ></textarea>
 
           {/* Code area  */}
@@ -76,7 +75,7 @@ export default function Post() {
             rows="8"
             id="description-id"
             placeholder="Explain the program briefly"
-            onChange={e => setWholeCode(e.target.value)}
+            onChange={(e) => setWholeCode(e.target.value)}
           ></textarea>
 
           <div class="flex items-start mb-6">

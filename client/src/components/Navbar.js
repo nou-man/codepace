@@ -10,7 +10,7 @@ const Navbar = () => {
           <a href="/" class="flex items-center">
             <img src={headerImage} class="h-8 mr-3" alt="Flowbite Logo" />
             <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-              CodePace
+              CodePace 
             </span>
           </a>
           <div class="flex md:order-2">
