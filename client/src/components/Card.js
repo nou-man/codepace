@@ -12,6 +12,7 @@ const Card = () => {
       const jsonData = await response.json(); //you should know ;)
 
       setCodes(jsonData); //setting the code default json to custom json named codes, for accessibilty
+      console.log(jsonData);
     } catch (err) {
       console.error(err.message);
     }

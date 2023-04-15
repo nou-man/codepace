@@ -39,6 +39,18 @@ app.get("/codepace", async (req, res) => {
   }
 });
 
+// //get semester -> subjects
+
+app.get("/sem_subject/:sem", async (req, res) => {
+  try {
+    const { sem } = req.params;
+    const allCode = await pool.query(" SELECT s.sem, s.sub_code, s.sub_name FROM subjects s WHERE s.sem = $1;",[sem]);
+    res.json(allCode.rows);
+  } catch (err) {
+    console.error(err.message);
+  }
+});
+
 // //get a specific code
 // app.get("/codebase/:id", async (req, res) => {
 //   try {
