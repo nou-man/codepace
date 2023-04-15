@@ -10,11 +10,12 @@ app.use(express.json());
 
 //ROUTES
 
-//create a code data
+//create a code data i.e posting data into database
 
-app.post("/codebase", async (req, res) => {
+app.post("/codepace", async (req, res) => {
   try {
-    const { sub_code, title, description, code_id, program } = req.body;
+    const { sub_code, title, description, code_id, program } = req.body; //from req.body 
+    //postgres query old version postgresql command to insert into database
     await pool.query("BEGIN;");
     const newCode = await pool.query("INSERT INTO code_description (sub_code, title, description) VALUES ($1, $2, $3) RETURNING code_id;",[sub_code, title, description]);
     const newCode2 = await pool.query("INSERT INTO programs (code_id, program) VALUES (currval('code_description_code_id_seq'), $1); ",[program]);
@@ -29,21 +30,9 @@ app.post("/codebase", async (req, res) => {
 
 // //get all code data
 
-// app.get("/codebase", async (req, res) => {
-//   try {
-//     const allCode = await pool.query("SELECT * FROM codebase");
-//     res.json(allCode.rows);
-//   } catch (err) {
-//     console.error(err.message);
-//   }
-// });
-
-
-//get all code data part 2
-
-app.get("/codebase", async (req, res) => {
+app.get("/codepace", async (req, res) => {
   try {
-    const allCode = await pool.query(" SELECT s.sem, s.sub_code, s.sub_name, cd.title, cd.description, p.program FROM subjects s INNER JOIN code_description cd ON s.sub_code = cd.sub_code INNER JOIN programs p ON cd.code_id = p.code_id WHERE s.sub_code = '18CSL66';");
+    const allCode = await pool.query(" SELECT cd.code_id, s.sem, s.sub_code, s.sub_name, cd.title, cd.description, p.program FROM subjects s INNER JOIN code_description cd ON s.sub_code = cd.sub_code INNER JOIN programs p ON cd.code_id = p.code_id;");
     res.json(allCode.rows);
   } catch (err) {
     console.error(err.message);
