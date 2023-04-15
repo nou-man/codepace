@@ -5,7 +5,7 @@ const pool = new Pool({
     password: "8090",
     host: "localhost",
     port: "5432",
-    database: "codepace_test"
+    database: "codepace"
 
 });
 
